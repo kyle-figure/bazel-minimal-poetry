@@ -1,0 +1,19 @@
+module(
+    name = "bazel_minimal_poetry",
+    repo_name = "com_github_bazel_minimal_poetry",
+)
+
+bazel_dep(name = "rules_python", version = "0.31.0")
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(python_version = "3.12")
+use_repo(python, "python_3_12")
+
+bazel_dep(name = "rules_poetry", version = "0.3.1")
+
+poetry = use_extension("@rules_poetry//python:extensions.bzl", "poetry")
+poetry.parse(
+    name = "poetry",
+    lock = "@//tools/poetry:poetry.lock",
+)
+use_repo(poetry, "poetry")
