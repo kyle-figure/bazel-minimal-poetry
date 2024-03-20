@@ -28,3 +28,13 @@ py_zip(
     name = "deploy_x86_64",
     target = ":app_x86_64",
 )
+
+py_binary_win(
+    name = "app_win",
+    binary = ":app",
+)
+
+py_zip(
+    name = "deploy_win",
+    target = ":app_win",
+)
